@@ -1,4 +1,4 @@
-const {ImageKit} = require("@imagekit/nodejs")
+const ImageKit = require("@imagekit/nodejs")
 
 const client = new ImageKit({
     publicKey :"public_btFxdg+X+3KyhTJ4NMQFvRl91fs=",

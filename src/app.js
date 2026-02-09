@@ -11,13 +11,20 @@ app.post("/create-post", upload.single("image"), async(req,res)=>{
 
     // const body = req.body
     const imgFile = req.file
-    console.log(req.body)
-    console.log(imgFile) 
-    // res.status(201).json({
-    //     msg : "created successfully"
-    // })
+    // console.log(req.body)
+    // console.log(imgFile) 
     const result = await uploadFile(imgFile.buffer)
     console.log(result)
+
+    const post = await postModel.create({
+        image : result.url,
+        caption : req.body.caption
+    })
+
+    return res.status(201).json({
+        msg : "Post created successfully",
+        post : post
+    })
 
 })
 module.exports = app;
