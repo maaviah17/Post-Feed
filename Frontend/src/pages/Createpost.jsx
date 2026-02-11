@@ -6,14 +6,12 @@ const CreatePost = () => {
       
       <div className="w-full max-w-md flex flex-col gap-6">
 
-        {/* Heading */}
         <div className="text-center">
           <h1 className="text-blue-600/75 dark:text-sky-400/75 text-4xl font-semibold">
             Create Post
           </h1>
         </div>
 
-        {/* Form Card */}
         <div className="bg-zinc-900 rounded-xl p-6 shadow-lg">
           <form className="flex flex-col gap-4">
 
