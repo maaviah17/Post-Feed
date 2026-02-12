@@ -1,6 +1,23 @@
 import React from "react";
+import axios from "axios";
 
 const CreatePost = () => {
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const formData = new FormData(e.target)
+
+        const res = await axios.post("http://localhost:3001/create-post", formData,{
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        
+         console.log(res.data);
+        
+      }
+
   return (
     <section className="min-h-screen bg-black text-white flex items-center justify-center">
       
@@ -13,7 +30,7 @@ const CreatePost = () => {
         </div>
 
         <div className="bg-zinc-900 rounded-xl p-6 shadow-lg">
-          <form className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
             <label className="block">
               <span className="text-sm text-gray-400 mb-1 block">

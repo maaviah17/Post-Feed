@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios"
 
 const FeedPost = () => {
   const [posts, setPosts] = useState([
@@ -12,6 +13,14 @@ const FeedPost = () => {
         caption : "Had a fun time ;)"
     }
   ]);
+
+  useEffect(()=>{
+
+    axios.get("http://localhost:3001/posts")
+      .then((res)=>{
+          setPosts(res.data.posts)
+      })
+  },[])
 
   return (
     <section className="min-h-screen bg-black text-white p-6">
