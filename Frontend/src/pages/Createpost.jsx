@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
-
+import {useNavigate} from "react-router-dom"
 const CreatePost = () => {
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -15,63 +17,77 @@ const CreatePost = () => {
         });
         
          console.log(res.data);
+         navigate("/feed")
         
       }
 
   return (
-    <section className="min-h-screen bg-black text-white flex items-center justify-center">
-      
-      <div className="w-full max-w-md flex flex-col gap-6">
+  <section className="relative min-h-screen bg-black text-white flex items-center justify-center overflow-hidden">
 
-        <div className="text-center">
-          <h1 className="text-blue-600/75 dark:text-sky-400/75 text-4xl font-semibold">
-            Create Post
-          </h1>
-        </div>
+    <div className="absolute w-96 h-96 bg-pink-500/20 rounded-full blur-3xl top-10 left-10"></div>
+    <div className="absolute w-96 h-96 bg-blue-500/20 rounded-full blur-3xl bottom-10 right-10"></div>
 
-        <div className="bg-zinc-900 rounded-xl p-6 shadow-lg">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <div className="relative w-full max-w-md flex flex-col gap-8 z-10">
 
-            <label className="block">
-              <span className="text-sm text-gray-400 mb-1 block">
-                Upload Image
-              </span>
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                className="block w-full text-sm text-gray-300
-                           file:mr-4 file:py-2 file:px-4
-                           file:rounded-lg file:border-0
-                           file:bg-white file:text-black
-                           hover:file:bg-gray-200 cursor-pointer"
-              />
-            </label>
-
-            <input
-              type="text"
-              name="caption"
-              placeholder="Enter caption..."
-              required
-              className="bg-transparent border border-gray-700 rounded-lg px-3 py-2
-                         placeholder-gray-500 focus:outline-none focus:ring-2
-                         focus:ring-white"
-            />
-
-            <button
-              type="submit"
-              className="mt-4 bg-green-200 text-black font-medium py-2 rounded-lg
-                         hover:bg-green-400 transition"
-            >
-              Submit
-            </button>
-
-          </form>
-        </div>
-
+      <div className="text-center">
+        <h1 className="text-4xl font-bold tracking-wide">
+          Create on <span className="text-pink-500">ummMMK</span>
+        </h1>
+        <p className="text-gray-400 text-sm mt-2">
+          Share your moment with the world.
+        </p>
       </div>
-    </section>
-  );
+
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 
+                      rounded-2xl p-8 shadow-2xl">
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+
+          <label className="flex flex-col gap-2">
+            <span className="text-sm text-gray-400">
+              Upload Image
+            </span>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              className="block w-full text-sm text-gray-300
+                         file:mr-4 file:py-2 file:px-4
+                         file:rounded-lg file:border-0
+                         file:bg-pink-500 file:text-black
+                         hover:file:bg-pink-600 
+                         file:transition cursor-pointer"
+            />
+          </label>
+
+          <input
+            type="text"
+            name="caption"
+            placeholder="Write something beautiful..."
+            required
+            className="bg-black/40 border border-white/10 rounded-xl px-4 py-3
+                       placeholder-gray-500 focus:outline-none
+                       focus:ring-2 focus:ring-pink-500
+                       transition"
+          />
+
+          <button
+            type="submit"
+            className="mt-2 bg-gradient-to-r from-pink-500 to-purple-500
+                       hover:scale-105 active:scale-95
+                       transition-transform duration-200
+                       text-black font-semibold py-3 rounded-xl shadow-lg"
+          >
+            Post It 🚀
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+);
+
 };
 
 export default CreatePost;
