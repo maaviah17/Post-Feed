@@ -59,6 +59,20 @@ GET /posts
 
 ---
 
+## 🗄 Database
+
+The project uses **MongoDB** with **Mongoose** for schema modeling.
+
+Example Post schema structure:
+
+- image (String)
+- caption (String)
+- createdAt (Date)
+
+The database structure will evolve as features like likes, comments, authentication, and user profiles are implemented.
+
+---
+
 ## 🚀 Getting Started
 
 ### 1️⃣ Clone the Repository

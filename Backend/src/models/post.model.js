@@ -1,8 +1,21 @@
 const mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema({
-    image : String,
-    caption : String
+    image : {
+        type : String,
+        required : true,
+    },
+    caption : {
+        type : String,
+        maxLength : 400,
+    },
+    user : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "user",
+        required : true
+    }
+},{
+    timestamps : true
 })
 
 const postModel = mongoose.model("post", postSchema)
