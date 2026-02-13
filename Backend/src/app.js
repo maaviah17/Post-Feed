@@ -1,43 +1,23 @@
 const express = require("express")
-const multer = require("multer")
-const uploadFile = require("./services/storage.service")
-const postModel = require("./models/post.model");
 const cors = require("cors")
+const cookieParser = require("cookie-parser");
 
 const app = express();
-app.use(cors())
+
+app.use(cors({
+  origin: "http://localhost:5173", // your frontend URL
+  credentials: true
+}));
+
 app.use(express.json());
-const  upload = multer({ storage : multer.memoryStorage() })
+app.use(cookieParser());
 
-app.post("/create-post", upload.single("image"), async(req,res)=>{
 
-    // const body = req.body
-    const imgFile = req.file
-    // console.log(req.body)
-    // console.log(imgFile) 
-    const result = await uploadFile(imgFile.buffer)
-    console.log(result)
+const postRoutes = require("./routes/posts.routes")
+const authRoutes = require("./routes/auth.routes")
 
-    const post = await postModel.create({
-        image : result.url,
-        caption : req.body.caption
-    })
+app.use("/api/posts",postRoutes)
+app.use("/api/auth", authRoutes)
 
-    return res.status(201).json({
-        msg : "Post created successfully",
-        post : post
-    })
 
-})
-
-app.get("/posts", async(req,res)=>{
-
-    const posts = await postModel.find();
-
-    return res.status(200).json({
-        msg : "all posts fetched successfully",
-        posts : posts,
-    })
-
-})
 module.exports = app;

@@ -6,20 +6,39 @@ const CreatePost = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        const formData = new FormData(e.target)
-
-        const res = await axios.post("http://localhost:3001/create-post", formData,{
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        
-         console.log(res.data);
-         navigate("/feed")
-        
+      e.preventDefault();
+      e.stopPropagation();
+  
+  const formData = new FormData();
+  
+  // Get the file from the input
+  const fileInput = e.target.image;
+  const captionInput = e.target.caption;
+  
+  // Check if file exists
+  if (!fileInput.files[0]) {
+    alert("Please select an image!");
+    return;
+  }
+  
+  // Manually append to FormData
+  formData.append('image', fileInput.files[0]);
+  formData.append('caption', captionInput.value);
+  
+  // Debug: Check what's in FormData
+  console.log("File:", fileInput.files[0]);
+  console.log("Caption:", captionInput.value);
+  
+  const res = await axios.post("http://localhost:3001/api/posts/", formData, {
+    withCredentials: true,
+    headers: {
+        'Content-Type': 'multipart/form-data'  
       }
+  });
+  
+  console.log(res.data);
+  navigate("/feed");
+}
 
   return (
   <section className="relative min-h-screen bg-black text-white flex items-center justify-center overflow-hidden">
